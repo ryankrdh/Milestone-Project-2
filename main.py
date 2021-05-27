@@ -49,7 +49,7 @@ class Deck:
 
     def deal_one(self):
         # Removes one card from the top
-        return self.all_cards.pop
+        return self.all_cards.pop()
 
     def shuffle_deck(self):
         # Shuffles the deck
@@ -102,12 +102,12 @@ while game_on:
 
     # Win check
     if len(first_player.all_cards) == 0:
-        print("Player One has no more cards. Game over. /nPlayer Two wins!")
+        print("Player One has no more cards. Game over. \nPlayer Two wins!")
         game_on = False
         break
 
     if len(second_player.all_cards) == 0:
-        print("Player Second has no more cards. Game over. /nPlayer One wins!")
+        print("Player Second has no more cards. Game over. \nPlayer One wins!")
         game_on = False
         break
 
@@ -160,5 +160,5 @@ while game_on:
 
             else:
                 for num in range(5):
-                    first_player.append(first_player.remove_one())
-                    second_player.append(second_player.remove_one())
+                    first_player_cards.append(first_player.remove_one())
+                    second_player_cards.append(second_player.remove_one())
