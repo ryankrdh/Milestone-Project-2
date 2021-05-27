@@ -81,6 +81,15 @@ second_player = Players('Two')
 
 # SETUP NEW GAME
 new_deck = Deck()
+new_deck.shuffle_deck()
+
+# SPLITTING THE DECK BETWEEN TWO PLAYERS
+# I'm using the number 26 because 52/2.
+for num in range(26):
+    first_player.add_card(new_deck.deal_one())
+    second_player.add_card(new_deck.deal_one())
+
+print(first_player.all_cards)
 
 
 
