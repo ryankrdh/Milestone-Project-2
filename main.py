@@ -11,6 +11,8 @@ Please the document README.md for the rules of the game.
 '''
 
 import random
+import pdb
+
 
 # LIST THAT MAKES UP A FULL DECK OF CARDS
 suits_list = ('Spades', 'Clubs', 'Hearts', 'Diamonds')
@@ -89,7 +91,74 @@ for num in range(26):
     first_player.add_card(new_deck.deal_one())
     second_player.add_card(new_deck.deal_one())
 
-print(first_player.all_cards)
 
+# Gameplay
+game_on = True
+game_round = 0
+while game_on:
 
+    game_round += 1
+    print(f"Round {game_round}")
 
+    # Win check
+    if len(first_player.all_cards) == 0:
+        print("Player One has no more cards. Game over. /nPlayer Two wins!")
+        game_on = False
+        break
+
+    if len(second_player.all_cards) == 0:
+        print("Player Second has no more cards. Game over. /nPlayer One wins!")
+        game_on = False
+        break
+
+    # New round and resets current cards on the table
+    first_player_cards = []
+    first_player_cards.append(first_player.remove_one())
+
+    second_player_cards = []
+    second_player_cards.append(second_player.remove_one())
+
+    play_round = True
+
+    while play_round:
+
+        if first_player_cards[-1].value > second_player_cards[-1].value:
+            # Player one wins the round
+            first_player.add_card(first_player_cards)
+            first_player.add_card(second_player_cards)
+
+            # On to the next round
+            play_round = False
+
+        elif first_player_cards[-1].value < second_player_cards[-1].value:
+            # Player two wins the round
+            second_player.add_card(first_player_cards)
+            second_player.add_card(second_player_cards)
+
+            # On to the next round
+            play_round = False
+
+        else:
+            # When the cards played by the players are equal.
+            # Each player will draw 5 more cards and compare the ranks of the last drawn card.
+            # If player doesn't have enough cards, game will end.
+            print("WAR!")
+
+            if len(first_player.all_cards) < 5:
+                print("Player One does not have enough cards to play WAR! GAME OVER AT WAR!")
+                print("Player Two WINS!")
+                game_on = False
+                break
+
+            elif len(second_player.all_cards) < 5:
+                print("Player Two does not have enough cards to play WAR! GAME OVER AT WAR!")
+                print("Player One WINS!")
+                game_on = False
+                break
+
+            # Still at war, add next cards
+
+            else:
+                for num in range(5):
+                    first_player.append(first_player.remove_one())
+                    second_player.append(second_player.remove_one())
