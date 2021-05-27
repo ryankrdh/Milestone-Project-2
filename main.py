@@ -81,6 +81,6 @@ second_player = Players('Two')
 
 # SETUP NEW GAME
 new_deck = Deck()
-new
+
 
 
